@@ -1,0 +1,6 @@
+{
+  "name": "standup",
+  "description": "A chrome extension to help facilitate standup meetings.",
+  "version": "1.0",
+  "manifest_version": 3
+}
