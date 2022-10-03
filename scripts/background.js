@@ -2,6 +2,6 @@
 chrome.action.onClicked.addListener((tab) => {
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    files: ['scripts/toggle-sidebar.js']
+    files: ['build/app.js']
   });
 });
