@@ -5,10 +5,7 @@ import ReactDOM from 'react-dom';
  * Renders the standup application within the sidebar.
  */
 function renderApplication() {
-  ReactDOM.render(
-    <div>This is a test</div>,
-    document.getElementById('standup-root')
-  );
+  ReactDOM.render(<div>This is a test</div>, document.getElementById('standup-root'));
 }
 
 /**
@@ -16,10 +13,10 @@ function renderApplication() {
  */
 function createSidebar() {
   const sidebar = document.createElement('div');
-  sidebar.setAttribute("id", 'standup-sidebar');
-  
+  sidebar.setAttribute('id', 'standup-sidebar');
+
   const root = document.createElement('div');
-  root.setAttribute("id", 'standup-root');
+  root.setAttribute('id', 'standup-root');
 
   sidebar.appendChild(root);
   document.body.appendChild(sidebar);
@@ -35,7 +32,7 @@ function toggleSidebar() {
   const sidebarContainer = document.getElementById('standup-sidebar');
 
   if (sidebarContainer) {
-    document.body.classList.toggle('standup-body')
+    document.body.classList.toggle('standup-body');
     sidebarContainer.classList.toggle('standup-hidden');
   } else {
     createSidebar();
