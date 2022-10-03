@@ -4,9 +4,9 @@
   "description": "A chrome extension to help facilitate standup meetings.",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "fix": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\" \"./scripts/**/*\"",
-    "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx,json}\" \"./scripts/**/*\"",
-    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss}\" \"./scripts/**/*\" \"./styles/**/*\""
+    "fix": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\" \"./chrome/**/*.js\"",
+    "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx,json}\" \"./chrome/**/*.js\"",
+    "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss}\" \"./chrome/**/*\""
   },
   "author": "Nien Van",
   "license": "ISC",

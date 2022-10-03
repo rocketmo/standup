@@ -8,10 +8,10 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "css": ["styles/sidebar.css"]
+      "css": ["chrome/sidebar.css"]
     }
   ],
   "background": {
-    "service_worker": "scripts/background.js"
+    "service_worker": "chrome/background.js"
   }
 }
