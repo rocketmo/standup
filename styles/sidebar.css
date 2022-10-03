@@ -1,0 +1,19 @@
+body.standup-body {
+  padding-right: 350px !important;
+}
+
+#standup-sidebar {
+  background-color: blue !important;
+  display: block !important;
+  height: 100% !important;
+  position: fixed !important;
+  right: 0px !important;
+  top: 0px !important;
+  width: 350px !important;
+  z-index: 2147483647 !important;
+}
+
+#standup-sidebar.standup-hidden {
+  display: none !important;
+  width: 0px !important;
+}

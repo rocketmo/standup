@@ -2,5 +2,16 @@
   "name": "standup",
   "description": "A chrome extension to help facilitate standup meetings.",
   "version": "1.0",
-  "manifest_version": 3
+  "manifest_version": 3,
+  "action": {},
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "css": ["styles/sidebar.css"]
+    }
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  }
 }
