@@ -102,6 +102,8 @@ export default function PersonsList(props: PersonsListProps) {
   const onRenameKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       onRenameConfirm();
+    } else if (event.key === 'Escape') {
+      onRenameCancel();
     }
   };
 
