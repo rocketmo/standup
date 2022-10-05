@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
+import shuffle from 'lodash/shuffle';
 import { v4 } from 'uuid';
 import Header from '../header';
 import PersonsList from '../persons-list';
@@ -23,6 +24,14 @@ export default function App() {
     setPersons(personsCopy);
     savePerson(newPerson);
     return newPerson;
+  };
+
+  const onClear = () => {
+    for (const person of persons) {
+      deletePerson(person.id);
+    }
+
+    setPersons([]);
   };
 
   const onDeletePerson = (personId: string) => {
@@ -52,6 +61,28 @@ export default function App() {
     savePerson(personsCopy[personIndex]);
   };
 
+  const onRestart = () => {
+    const personsCopy: Person[] = cloneDeep(persons);
+    for (const person of personsCopy) {
+      person.hasCompleted = false;
+      savePerson(person);
+    }
+
+    setPersons(personsCopy);
+  };
+
+  const onShuffle = () => {
+    const personsCopy: Person[] = cloneDeep(persons);
+    const shuffledPersons = shuffle(personsCopy);
+
+    for (let personIndex = 0; personIndex < shuffledPersons.length; personIndex += 1) {
+      shuffledPersons[personIndex].index = personIndex;
+      savePerson(shuffledPersons[personIndex]);
+    }
+
+    setPersons(shuffledPersons);
+  };
+
   const onTogglePerson = (personId: string) => {
     const personIndex = getPersonIndex(persons, personId);
     const personsCopy: Person[] = cloneDeep(persons);
@@ -73,8 +104,11 @@ export default function App() {
       <PersonsList
         persons={persons}
         onAddPerson={onAddPerson}
+        onClear={onClear}
         onDeletePerson={onDeletePerson}
         onRenamePerson={onRenamePerson}
+        onRestart={onRestart}
+        onShuffle={onShuffle}
         onTogglePerson={onTogglePerson}
       />
     </div>

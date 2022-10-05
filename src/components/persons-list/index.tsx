@@ -1,6 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faEllipsisVertical,
+  faRotateRight,
+  faShuffle,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { getPersonIndex } from '../../util';
@@ -10,13 +16,17 @@ import './index.scss';
 interface PersonsListProps {
   persons: Person[];
   onAddPerson: () => Person;
+  onClear: () => void;
   onDeletePerson: (personId: string) => void;
   onRenamePerson: (personId: string, newName: string) => void;
+  onRestart: () => void;
+  onShuffle: () => void;
   onTogglePerson: (personId: string) => void;
 }
 
 export default function PersonsList(props: PersonsListProps) {
-  const [anchorElement, setAnchorElement] = useState<undefined | HTMLElement>(undefined);
+  const [extrasAnchor, setExtrasAnchor] = useState<undefined | HTMLElement>(undefined);
+  const [personAnchor, setPersonAnchor] = useState<undefined | HTMLElement>(undefined);
   const [personMenuId, setPersonMenuId] = useState<undefined | string>(undefined);
   const [personRenameId, setPersonRenameId] = useState<undefined | string>(undefined);
   const [tempPersonName, setTempPersonName] = useState<undefined | string>(undefined);
@@ -31,23 +41,36 @@ export default function PersonsList(props: PersonsListProps) {
     setTempPersonName(newPerson.name);
   };
 
-  const onMenuOpen = (personId: string, event: React.MouseEvent<HTMLButtonElement>) => {
+  const onPersonMenuOpen = (personId: string, event: React.MouseEvent<HTMLButtonElement>) => {
     setPersonMenuId(personId);
-    setAnchorElement(event.currentTarget);
+    setPersonAnchor(event.currentTarget);
   };
 
-  const onMenuClose = () => {
+  const onPersonMenuClose = () => {
     setPersonMenuId(undefined);
-    setAnchorElement(undefined);
+    setPersonAnchor(undefined);
+  };
+
+  const onExtrasMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setExtrasAnchor(event.currentTarget);
+  };
+
+  const onExtrasMenuClose = () => {
+    setExtrasAnchor(undefined);
+  };
+
+  const onClearClick = () => {
+    props.onClear();
+    onExtrasMenuClose();
   };
 
   const onDeletePerson = (personId: string) => {
     props.onDeletePerson(personId);
-    onMenuClose();
+    onPersonMenuClose();
   };
 
   const onRenameOpen = (personId: string) => {
-    onMenuClose();
+    onPersonMenuClose();
 
     // HACK: Wait until the menu is closed on the next render so we can show the rename input
     // and focus on it
@@ -75,7 +98,7 @@ export default function PersonsList(props: PersonsListProps) {
   };
 
   const getDefaultItem = (person: Person) => {
-    const isOpen = !!anchorElement && person.id === personMenuId;
+    const isOpen = !!personAnchor && person.id === personMenuId;
 
     return (
       <li key={person.id}>
@@ -84,10 +107,10 @@ export default function PersonsList(props: PersonsListProps) {
             {person.name || '<No name>'}
           </span>
         </button>
-        <button onClick={onMenuOpen.bind(undefined, person.id)}>
+        <button onClick={onPersonMenuOpen.bind(undefined, person.id)}>
           <FontAwesomeIcon icon={faEllipsisVertical} />
         </button>
-        <Menu anchorEl={anchorElement} open={isOpen} onClose={onMenuClose}>
+        <Menu anchorEl={personAnchor} open={isOpen} onClose={onPersonMenuClose}>
           <MenuItem onClick={onRenameOpen.bind(undefined, person.id)}>Rename</MenuItem>
           <MenuItem onClick={onDeletePerson.bind(undefined, person.id)}>Delete</MenuItem>
         </Menu>
@@ -143,6 +166,18 @@ export default function PersonsList(props: PersonsListProps) {
   return (
     <div>
       <h2>Up next...</h2>
+      <button onClick={props.onShuffle}>
+        <FontAwesomeIcon icon={faShuffle} />
+      </button>
+      <button onClick={props.onRestart}>
+        <FontAwesomeIcon icon={faRotateRight} />
+      </button>
+      <button onClick={onExtrasMenuOpen}>
+        <FontAwesomeIcon icon={faEllipsisVertical} />
+      </button>
+      <Menu anchorEl={extrasAnchor} open={!!extrasAnchor} onClose={onExtrasMenuClose}>
+        <MenuItem onClick={onClearClick}>Clear</MenuItem>
+      </Menu>
       <ul>{personListItems}</ul>
       <button onClick={onAddPersonClick}>Add person</button>
     </div>
