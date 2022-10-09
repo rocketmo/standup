@@ -33,10 +33,11 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: false,
+  },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-  ]
+  plugins: [new CleanWebpackPlugin()],
 };
