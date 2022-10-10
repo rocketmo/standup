@@ -13,5 +13,11 @@
   ],
   "background": {
     "service_worker": "chrome/background.js"
+  },
+  "icons": {
+    "16": "chrome/icons/icon16.png",
+    "32": "chrome/icons/icon32.png",
+    "48": "chrome/icons/icon48.png",
+    "128": "chrome/icons/icon128.png"
   }
 }
