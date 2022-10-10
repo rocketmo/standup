@@ -18,7 +18,7 @@ export default function ActiveBar(props: ActiveBarProps) {
     return (
       <h2>
         {person.name || 'No name'}
-        <button onClick={props.onCompletePerson.bind(null, person.id)}>
+        <button onClick={props.onCompletePerson.bind(undefined, person.id)}>
           <FontAwesomeIcon icon={faCheck} />
         </button>
       </h2>

@@ -104,6 +104,26 @@ export default function App() {
     setActivePerson(undefined);
   };
 
+  const onSelectNextPerson = (personId: string) => {
+    const personIndex = getPersonIndex(persons, personId);
+    if (personIndex < 0) return;
+
+    const prevActivePersonId = activePerson?.id;
+    setActivePerson(cloneDeep(persons[personIndex]));
+
+    setPersons((previousPersons) => {
+      return previousPersons.map((person) => {
+        if (person.id === prevActivePersonId) {
+          person.hasCompleted = true;
+        } else if (person.id === personId) {
+          person.hasCompleted = false;
+        }
+
+        return person;
+      });
+    });
+  };
+
   const onShuffle = () => {
     setPersons((previousPersons) => {
       const shuffledPersons = shuffle(previousPersons);
@@ -173,6 +193,7 @@ export default function App() {
         onDeletePerson={onDeletePerson}
         onRenamePerson={onRenamePerson}
         onRestart={onRestart}
+        onSelectNextPerson={onSelectNextPerson}
         onShuffle={onShuffle}
         onTogglePerson={onTogglePerson}
       />

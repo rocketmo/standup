@@ -5,6 +5,7 @@ import {
   faEllipsisVertical,
   faRotateRight,
   faShuffle,
+  faTurnUp,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import Menu from '@mui/material/Menu';
@@ -20,6 +21,7 @@ interface PersonsListProps {
   onDeletePerson: (personId: string) => void;
   onRenamePerson: (personId: string, newName: string) => void;
   onRestart: () => void;
+  onSelectNextPerson: (personId: string) => void;
   onShuffle: () => void;
   onTogglePerson: (personId: string) => void;
 }
@@ -106,6 +108,9 @@ export default function PersonsList(props: PersonsListProps) {
           <span className={person.hasCompleted ? 'standup-person-completed' : ''}>
             {person.name || '<No name>'}
           </span>
+        </button>
+        <button onClick={props.onSelectNextPerson.bind(undefined, person.id)}>
+          <FontAwesomeIcon icon={faTurnUp} />
         </button>
         <button onClick={onPersonMenuOpen.bind(undefined, person.id)}>
           <FontAwesomeIcon icon={faEllipsisVertical} />
