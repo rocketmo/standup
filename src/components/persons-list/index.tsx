@@ -166,23 +166,32 @@ export default function PersonsList(props: PersonsListProps) {
     return [msgListItem];
   };
 
+  const getTopActionsBar = () => {
+    return (
+      <div>
+        <button onClick={props.onShuffle}>
+          <FontAwesomeIcon icon={faShuffle} />
+        </button>
+        <button onClick={props.onRestart}>
+          <FontAwesomeIcon icon={faRotateRight} />
+        </button>
+        <button onClick={onExtrasMenuOpen}>
+          <FontAwesomeIcon icon={faEllipsisVertical} />
+        </button>
+        <Menu anchorEl={extrasAnchor} open={!!extrasAnchor} onClose={onExtrasMenuClose}>
+          <MenuItem onClick={onClearClick}>Clear</MenuItem>
+        </Menu>
+      </div>
+    );
+  };
+
   const personListItems = props.persons.length ? getListItems() : getEmptyMessage();
+  const topActionsBar = props.persons.length ? getTopActionsBar() : null;
 
   return (
     <div>
       <h2>Up next...</h2>
-      <button onClick={props.onShuffle}>
-        <FontAwesomeIcon icon={faShuffle} />
-      </button>
-      <button onClick={props.onRestart}>
-        <FontAwesomeIcon icon={faRotateRight} />
-      </button>
-      <button onClick={onExtrasMenuOpen}>
-        <FontAwesomeIcon icon={faEllipsisVertical} />
-      </button>
-      <Menu anchorEl={extrasAnchor} open={!!extrasAnchor} onClose={onExtrasMenuClose}>
-        <MenuItem onClick={onClearClick}>Clear</MenuItem>
-      </Menu>
+      {topActionsBar}
       <ul>{personListItems}</ul>
       <button onClick={onAddPersonClick}>Add person</button>
     </div>
