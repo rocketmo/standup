@@ -1,5 +1,6 @@
 body.standup-body {
   padding-right: 350px !important;
+  width: auto !important;
 }
 
 #standup-sidebar {

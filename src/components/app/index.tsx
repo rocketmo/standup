@@ -7,6 +7,7 @@ import Header from '../header';
 import PersonsList from '../persons-list';
 import { loadPersons, deletePerson, savePerson } from '../../util/idb';
 import { getPersonIndex } from '../../util';
+import { highlightSwimLane } from '../../util/klondike';
 import type { Person } from '../../util/types';
 
 export default function App() {
@@ -109,14 +110,18 @@ export default function App() {
     if (personIndex < 0) return;
 
     const prevActivePersonId = activePerson?.id;
-    setActivePerson(cloneDeep(persons[personIndex]));
+    const nextPerson = persons[personIndex];
+    setActivePerson(cloneDeep(nextPerson));
+    highlightSwimLane(nextPerson.name);
 
     setPersons((previousPersons) => {
       return previousPersons.map((person) => {
         if (person.id === prevActivePersonId) {
           person.hasCompleted = true;
+          savePerson(person);
         } else if (person.id === personId) {
           person.hasCompleted = false;
+          savePerson(person);
         }
 
         return person;
