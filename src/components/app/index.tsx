@@ -29,7 +29,6 @@ export default function App() {
     };
 
     setPersons((previousPersons) => [...previousPersons, newPerson]);
-    savePerson(newPerson);
     return newPerson;
   };
 
@@ -50,8 +49,6 @@ export default function App() {
         }
 
         person.hasCompleted = true;
-        savePerson(person);
-
         return person;
       });
     });
@@ -63,20 +60,20 @@ export default function App() {
     setPersons((previousPersons) => {
       // Delete the person from the local array and from the DB
       const personToDeleteIndex = getPersonIndex(previousPersons, personId);
-      const updatedPersons = previousPersons.filter((person, idx) => idx !== personToDeleteIndex);
-      deletePerson(personId);
+      const updatedPersons = previousPersons.filter((_, idx) => idx !== personToDeleteIndex);
 
       // Update indices of persons in the array
       for (let personIndex = 0; personIndex < updatedPersons.length; personIndex += 1) {
         const person = updatedPersons[personIndex];
         if (person.index !== personIndex) {
           updatedPersons[personIndex].index = personIndex;
-          savePerson(updatedPersons[personIndex]);
         }
       }
 
       return updatedPersons;
     });
+
+    deletePerson(personId);
   };
 
   const onRenamePerson = (personId: string, newName: string) => {
@@ -85,8 +82,6 @@ export default function App() {
       return previousPersons.map((person, idx) => {
         if (idx !== personIndex) return person;
         person.name = newName;
-        savePerson(person);
-
         return person;
       });
     });
@@ -96,8 +91,6 @@ export default function App() {
     setPersons((previousPersons) => {
       return previousPersons.map((person) => {
         person.hasCompleted = false;
-        savePerson(person);
-
         return person;
       });
     });
@@ -118,10 +111,8 @@ export default function App() {
       return previousPersons.map((person) => {
         if (person.id === prevActivePersonId) {
           person.hasCompleted = true;
-          savePerson(person);
         } else if (person.id === personId) {
           person.hasCompleted = false;
-          savePerson(person);
         }
 
         return person;
@@ -134,7 +125,6 @@ export default function App() {
       const shuffledPersons = shuffle(previousPersons);
       for (let personIndex = 0; personIndex < shuffledPersons.length; personIndex += 1) {
         shuffledPersons[personIndex].index = personIndex;
-        savePerson(shuffledPersons[personIndex]);
       }
 
       return shuffledPersons;
@@ -147,8 +137,6 @@ export default function App() {
       return previousPersons.map((person, idx) => {
         if (idx !== personIndex) return person;
         person.hasCompleted = !person.hasCompleted;
-        savePerson(person);
-
         return person;
       });
     });
@@ -173,6 +161,13 @@ export default function App() {
       setNextActivePerson();
     }
   }, [persons, activePerson, setNextActivePerson]);
+
+  // Save persons whenever the list is updated
+  useEffect(() => {
+    for (const person of persons) {
+      savePerson(person);
+    }
+  }, [persons]);
 
   // Only show the active bar if there are persons in the standup
   let activeBar: JSX.Element | null = null;
