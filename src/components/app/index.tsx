@@ -13,11 +13,11 @@ import type { Person } from '../../util/types';
 export default function App() {
   const [hasLoadedPersons, setHasLoadedPersons] = useState<boolean>(false);
   const [persons, setPersons] = useState<Person[]>([]);
-  const [activePerson, setActivePerson] = useState<Person | undefined>(undefined);
+  const [activePersonId, setActivePersonId] = useState<string | undefined>(undefined);
 
   const setNextActivePerson = useCallback(() => {
     const nextPerson = persons.find((person) => !person.hasCompleted);
-    setActivePerson(cloneDeep(nextPerson));
+    setActivePersonId(nextPerson?.id);
   }, [persons]);
 
   const onAddPerson = () => {
@@ -95,16 +95,16 @@ export default function App() {
       });
     });
 
-    setActivePerson(undefined);
+    setActivePersonId(undefined);
   };
 
   const onSelectNextPerson = (personId: string) => {
     const personIndex = getPersonIndex(persons, personId);
     if (personIndex < 0) return;
 
-    const prevActivePersonId = activePerson?.id;
+    const prevActivePersonId = activePersonId;
     const nextPerson = persons[personIndex];
-    setActivePerson(cloneDeep(nextPerson));
+    setActivePersonId(personId);
     highlightSwimLane(nextPerson.name);
 
     setPersons((previousPersons) => {
@@ -154,13 +154,13 @@ export default function App() {
 
   // Set next active person if the current active person has gone
   useEffect(() => {
-    if (!activePerson) return;
+    if (!activePersonId) return;
 
-    const personIndex = getPersonIndex(persons, activePerson.id);
+    const personIndex = getPersonIndex(persons, activePersonId);
     if (personIndex < 0 || persons[personIndex].hasCompleted) {
       setNextActivePerson();
     }
-  }, [persons, activePerson, setNextActivePerson]);
+  }, [persons, activePersonId, setNextActivePerson]);
 
   // Save persons whenever the list is updated
   useEffect(() => {
@@ -174,7 +174,7 @@ export default function App() {
   if (persons.length) {
     activeBar = (
       <ActiveBar
-        activePerson={activePerson}
+        activePersonId={activePersonId}
         persons={persons}
         onCompletePerson={onCompletePerson}
         onStart={setNextActivePerson}

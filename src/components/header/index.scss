@@ -1,7 +1,6 @@
 .standup-header {
   align-items: center;
   background-color: #333;
-  color: #fff;
   display: flex;
   flex-direction: row;
   font-size: 16px;
@@ -9,6 +8,7 @@
   padding: 8px;
 
   h1 {
+    color: #fff;
     font-size: inherit;
     font-weight: 700;
     line-height: normal;
@@ -17,6 +17,10 @@
   button {
     background-color: transparent;
     border: none;
-    color: inherit;
+    color: #fff;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
