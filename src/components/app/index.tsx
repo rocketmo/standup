@@ -1,5 +1,4 @@
 import { useCallback, useState, useEffect } from 'react';
-import cloneDeep from 'lodash/cloneDeep';
 import shuffle from 'lodash/shuffle';
 import { v4 } from 'uuid';
 import ActiveBar from '../active-bar';
@@ -7,7 +6,7 @@ import Header from '../header';
 import PersonsList from '../persons-list';
 import { loadPersons, deletePerson, savePerson } from '../../util/idb';
 import { getPersonIndex } from '../../util';
-import { highlightSwimLane } from '../../util/klondike';
+import { closeAllSwimLanes, highlightSwimLane } from '../../util/klondike';
 import type { Person } from '../../util/types';
 
 export default function App() {
@@ -18,6 +17,12 @@ export default function App() {
   const setNextActivePerson = useCallback(() => {
     const nextPerson = persons.find((person) => !person.hasCompleted);
     setActivePersonId(nextPerson?.id);
+
+    if (nextPerson) {
+      highlightSwimLane(nextPerson.name);
+    } else {
+      closeAllSwimLanes();
+    }
   }, [persons]);
 
   const onAddPerson = () => {
@@ -52,8 +57,6 @@ export default function App() {
         return person;
       });
     });
-
-    setNextActivePerson();
   };
 
   const onDeletePerson = (personId: string) => {

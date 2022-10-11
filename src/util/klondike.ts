@@ -4,6 +4,17 @@ export function highlightSwimLane(personName: string): void {
   scrollToHeader(personHeader);
 }
 
+export function closeAllSwimLanes(): void {
+  const expanders = document.querySelectorAll<HTMLButtonElement>(
+    '.ghx-swimlane:not(.ghx-closed) .ghx-expander',
+  );
+
+  for (let expanderIdx = 0; expanderIdx < expanders.length; expanderIdx += 1) {
+    const expander = expanders[expanderIdx];
+    expander.click();
+  }
+}
+
 function openSwimLane(personName: string): HTMLElement | undefined {
   const headers = document.querySelectorAll<HTMLElement>('.ghx-swimlane-header');
   let defaultHeader: HTMLElement | null | undefined;
@@ -32,17 +43,6 @@ function openSwimLane(personName: string): HTMLElement | undefined {
 
 function getExpanderFromHeader(personHeader: HTMLElement): HTMLButtonElement | null {
   return personHeader.querySelector<HTMLButtonElement>('.ghx-expander');
-}
-
-function closeAllSwimLanes(): void {
-  const expanders = document.querySelectorAll<HTMLButtonElement>(
-    '.ghx-swimlane:not(.ghx-closed) .ghx-expander',
-  );
-
-  for (let expanderIdx = 0; expanderIdx < expanders.length; expanderIdx += 1) {
-    const expander = expanders[expanderIdx];
-    expander.click();
-  }
 }
 
 function scrollToHeader(personHeader?: HTMLElement): void {
