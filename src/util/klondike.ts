@@ -11,9 +11,9 @@ function openSwimLane(personName: string): HTMLElement | undefined {
   for (let headerIdx = 0; headerIdx < headers.length; headerIdx += 1) {
     const header = headers[headerIdx];
     const headerTextElement = header.querySelector('.ghx-heading span');
-    const headerText = headerTextElement?.textContent;
+    const headerText = headerTextElement?.textContent || '';
 
-    if (headerText && headerText.toLowerCase().startsWith(personName.toLowerCase())) {
+    if (doesNameMatchHeader(personName, headerText)) {
       const expander = getExpanderFromHeader(header);
       expander?.click();
       return header;
@@ -56,4 +56,23 @@ function scrollToHeader(personHeader?: HTMLElement): void {
     left: 0,
     top: columnsYOffset - headerHeight,
   });
+}
+
+function doesNameMatchHeader(personName: string, headerText: string): boolean {
+  const personTerms = personName.toLowerCase().split(/\W+/);
+  const headerTerms = headerText.toLowerCase().split(/\W+/);
+
+  for (const personTerm of personTerms) {
+    let foundMatch = false;
+    for (const headerTerm of headerTerms) {
+      if (headerTerm.startsWith(personTerm)) {
+        foundMatch = true;
+        break;
+      }
+    }
+
+    if (!foundMatch) return false;
+  }
+
+  return true;
 }
