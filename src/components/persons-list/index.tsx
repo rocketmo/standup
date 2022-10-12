@@ -103,13 +103,20 @@ export default function PersonsList(props: PersonsListProps) {
 
   const getDefaultItem = (person: Person) => {
     const isOpen = !!personAnchor && person.id === personMenuId;
+    const isHighlighted = person.id === props.activePersonId;
     let itemClass = '';
 
     if (person.hasCompleted) {
       itemClass = 'standup-person-completed';
-    } else if (person.id === props.activePersonId) {
-      itemClass = 'standup-person-highlighted';
+    } else if (isHighlighted) {
+      itemClass = 'standup-person-highlight';
     }
+
+    const selectNextButton = (
+      <button onClick={props.onSelectNextPerson.bind(undefined, person.id)}>
+        <FontAwesomeIcon icon={faTurnUp} />
+      </button>
+    );
 
     return (
       <li key={person.id} className={itemClass}>
@@ -120,9 +127,7 @@ export default function PersonsList(props: PersonsListProps) {
           <span>{person.name || '<No name>'}</span>
         </button>
         <div className="standup-person-actions">
-          <button onClick={props.onSelectNextPerson.bind(undefined, person.id)}>
-            <FontAwesomeIcon icon={faTurnUp} />
-          </button>
+          {!isHighlighted ? selectNextButton : null}
           <button onClick={onPersonMenuOpen.bind(undefined, person.id)}>
             <FontAwesomeIcon icon={faEllipsisVertical} />
           </button>

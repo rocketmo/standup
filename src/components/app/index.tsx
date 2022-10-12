@@ -112,10 +112,10 @@ export default function App() {
 
     setPersons((previousPersons) => {
       return previousPersons.map((person) => {
-        if (person.id === prevActivePersonId) {
-          person.hasCompleted = true;
-        } else if (person.id === personId) {
+        if (person.id === personId) {
           person.hasCompleted = false;
+        } else if (person.id === prevActivePersonId) {
+          person.hasCompleted = true;
         }
 
         return person;
