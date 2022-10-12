@@ -190,6 +190,7 @@ export default function App() {
       <Header />
       {activeBar}
       <PersonsList
+        activePersonId={activePersonId}
         persons={persons}
         onAddPerson={onAddPerson}
         onClear={onClear}

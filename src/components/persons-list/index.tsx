@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheck,
   faEllipsisVertical,
+  faPlus,
   faRotateRight,
   faShuffle,
   faTurnUp,
@@ -15,6 +16,7 @@ import type { Person } from '../../util/types';
 import './index.scss';
 
 interface PersonsListProps {
+  activePersonId?: string;
   persons: Person[];
   onAddPerson: () => Person;
   onClear: () => void;
@@ -101,24 +103,34 @@ export default function PersonsList(props: PersonsListProps) {
 
   const getDefaultItem = (person: Person) => {
     const isOpen = !!personAnchor && person.id === personMenuId;
+    let itemClass = '';
+
+    if (person.hasCompleted) {
+      itemClass = 'standup-person-completed';
+    } else if (person.id === props.activePersonId) {
+      itemClass = 'standup-person-highlighted';
+    }
 
     return (
-      <li key={person.id}>
-        <button onClick={props.onTogglePerson.bind(undefined, person.id)}>
-          <span className={person.hasCompleted ? 'standup-person-completed' : ''}>
-            {person.name || '<No name>'}
-          </span>
+      <li key={person.id} className={itemClass}>
+        <button
+          className="standup-person"
+          onClick={props.onTogglePerson.bind(undefined, person.id)}
+        >
+          <span>{person.name || '<No name>'}</span>
         </button>
-        <button onClick={props.onSelectNextPerson.bind(undefined, person.id)}>
-          <FontAwesomeIcon icon={faTurnUp} />
-        </button>
-        <button onClick={onPersonMenuOpen.bind(undefined, person.id)}>
-          <FontAwesomeIcon icon={faEllipsisVertical} />
-        </button>
-        <Menu anchorEl={personAnchor} open={isOpen} onClose={onPersonMenuClose}>
-          <MenuItem onClick={onRenameOpen.bind(undefined, person.id)}>Rename</MenuItem>
-          <MenuItem onClick={onDeletePerson.bind(undefined, person.id)}>Delete</MenuItem>
-        </Menu>
+        <div className="standup-person-actions">
+          <button onClick={props.onSelectNextPerson.bind(undefined, person.id)}>
+            <FontAwesomeIcon icon={faTurnUp} />
+          </button>
+          <button onClick={onPersonMenuOpen.bind(undefined, person.id)}>
+            <FontAwesomeIcon icon={faEllipsisVertical} />
+          </button>
+          <Menu anchorEl={personAnchor} open={isOpen} onClose={onPersonMenuClose}>
+            <MenuItem onClick={onRenameOpen.bind(undefined, person.id)}>Rename</MenuItem>
+            <MenuItem onClick={onDeletePerson.bind(undefined, person.id)}>Delete</MenuItem>
+          </Menu>
+        </div>
       </li>
     );
   };
@@ -139,26 +151,39 @@ export default function PersonsList(props: PersonsListProps) {
     return (
       <li key={person.id}>
         <input
+          className="standup-person-rename-input"
           onChange={onTempPersonNameChange}
           onKeyDown={onRenameKeyDown}
           ref={renameInputFocusRef}
           type="text"
           value={tempPersonName}
         />
-        <button onClick={onRenameConfirm}>
-          <FontAwesomeIcon icon={faCheck} />
-        </button>
-        <button onClick={onRenameCancel}>
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
+        <div className="standup-person-rename-actions">
+          <button onClick={onRenameConfirm}>
+            <FontAwesomeIcon icon={faCheck} />
+          </button>
+          <button onClick={onRenameCancel}>
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </div>
       </li>
     );
   };
 
   const getListItems = () => {
-    return props.persons.map((person) => {
-      return person.id === personRenameId ? getRenameItem(person) : getDefaultItem(person);
-    });
+    return props.persons
+      .sort((personA, personB) => {
+        if (personA.hasCompleted && !personB.hasCompleted) {
+          return 1;
+        } else if (!personA.hasCompleted && personB.hasCompleted) {
+          return -1;
+        }
+
+        return personA.index - personB.index;
+      })
+      .map((person) => {
+        return person.id === personRenameId ? getRenameItem(person) : getDefaultItem(person);
+      });
   };
 
   const getEmptyMessage = () => {
@@ -168,7 +193,7 @@ export default function PersonsList(props: PersonsListProps) {
 
   const getTopActionsBar = () => {
     return (
-      <div>
+      <div id="standup-top-action-bar">
         <button onClick={props.onShuffle}>
           <FontAwesomeIcon icon={faShuffle} />
         </button>
@@ -190,10 +215,14 @@ export default function PersonsList(props: PersonsListProps) {
 
   return (
     <div>
-      <h2>Up next...</h2>
-      {topActionsBar}
-      <ul>{personListItems}</ul>
-      <button onClick={onAddPersonClick}>Add person</button>
+      <div id="standup-person-list-header">
+        <h2 id="standup-up-next-header">Up next...</h2>
+        {topActionsBar}
+      </div>
+      <ul id="standup-person-list">{personListItems}</ul>
+      <button id="standup-add-person" onClick={onAddPersonClick}>
+        <FontAwesomeIcon icon={faPlus} /> Add person
+      </button>
     </div>
   );
 }

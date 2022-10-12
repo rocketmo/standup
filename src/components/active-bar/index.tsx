@@ -5,7 +5,7 @@ import { getPersonIndex } from '../../util';
 import './index.scss';
 
 interface ActiveBarProps {
-  activePersonId: string | undefined;
+  activePersonId?: string;
   persons: Person[];
   onCompletePerson: (personId: string) => void;
   onStart: () => void;
