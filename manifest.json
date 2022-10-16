@@ -19,5 +19,11 @@
     "32": "chrome/icons/icon32.png",
     "48": "chrome/icons/icon48.png",
     "128": "chrome/icons/icon128.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "matches": ["<all_urls>"],
+      "resources": ["assets/images/*"]
+    }
+  ]
 }

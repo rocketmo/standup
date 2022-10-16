@@ -12,6 +12,8 @@ interface ActiveBarProps {
 }
 
 export default function ActiveBar(props: ActiveBarProps) {
+  const clapGifUrl = chrome.runtime.getURL('assets/images/sob-clap.gif');
+
   const areAllPersonsCompleted = () => {
     return props.persons.every((person) => person.hasCompleted);
   };
@@ -29,7 +31,15 @@ export default function ActiveBar(props: ActiveBarProps) {
 
   const getNonActiveElement = () => {
     if (areAllPersonsCompleted()) {
-      return <div id="standup-finished">Finished!</div>;
+      const clappingImg = <img src={clapGifUrl} alt="Sob clapping" />;
+
+      return (
+        <div id="standup-finished">
+          {clappingImg}
+          <span>&nbsp;Finished!&nbsp;</span>
+          {clappingImg}
+        </div>
+      );
     }
 
     return (

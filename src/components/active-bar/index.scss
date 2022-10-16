@@ -16,15 +16,25 @@
 }
 
 #standup-finished {
+  align-items: center;
   background-color: #4fa3e3;
   border: none;
   border-bottom: 1px solid #333;
   color: #222;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   font-size: 36px;
   line-height: 1;
+  justify-content: center;
   padding: 24px 8px;
   text-align: center;
-  width: 100%;
+  width: auto;
+
+  img {
+    display: inline-block;
+    height: 32px;
+  }
 }
 
 #standup-active-person {

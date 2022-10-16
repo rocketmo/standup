@@ -31,6 +31,7 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "@babel/runtime": "^7.19.0",
+    "@types/chrome": "0.0.198",
     "@types/lodash": "^4.14.186",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
