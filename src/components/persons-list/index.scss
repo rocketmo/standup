@@ -48,7 +48,6 @@
     justify-content: space-between;
     margin: 0;
     padding: 4px 16px;
-    width: calc(100% - 32px);
 
     &:nth-child(odd) {
       background-color: #eee;
@@ -121,10 +120,29 @@
       }
     }
 
-    .standup-person-rename-input {
-      color: #222;
+    .standup-person-rename-input-container {
       flex: 1 0 auto;
-      padding: 4px 0;
+
+      .standup-person-rename-input {
+        color: #222;
+        padding: 4px 8px;
+        width: auto;
+
+        &.standup-invalid-name {
+          border: 1px solid #ff0000;
+        }
+      }
+
+      .standup-name-error {
+        color: #f00;
+        display: block;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+    }
+
+    .standup-person-rename-actions {
+      flex: 1 0 auto;
     }
   }
 }

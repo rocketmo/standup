@@ -34,6 +34,7 @@ export default function PersonsList(props: PersonsListProps) {
   const [personMenuId, setPersonMenuId] = useState<undefined | string>(undefined);
   const [personRenameId, setPersonRenameId] = useState<undefined | string>(undefined);
   const [tempPersonName, setTempPersonName] = useState<undefined | string>(undefined);
+  const [showInvalidNameError, setShowInvalidNameError] = useState<boolean>(false);
 
   const renameInputFocusRef = useCallback((renameInput: HTMLInputElement | null) => {
     renameInput?.focus();
@@ -73,8 +74,21 @@ export default function PersonsList(props: PersonsListProps) {
     onPersonMenuClose();
   };
 
+  const deleteNoNamePerson = (personId: string) => {
+    const personIndex = getPersonIndex(props.persons, personId);
+    const person = props.persons[personIndex];
+    if (person && !person.name) {
+      props.onDeletePerson(personId);
+    }
+  };
+
   const onRenameOpen = (personId: string) => {
     onPersonMenuClose();
+    setShowInvalidNameError(false);
+
+    if (personRenameId) {
+      deleteNoNamePerson(personRenameId);
+    }
 
     // HACK: Wait until the menu is closed on the next render so we can show the rename input
     // and focus on it
@@ -91,14 +105,25 @@ export default function PersonsList(props: PersonsListProps) {
       throw new ReferenceError('No person to rename.');
     }
 
-    props.onRenamePerson(personRenameId, tempPersonName || '');
+    // Name is required
+    if (!tempPersonName) {
+      setShowInvalidNameError(true);
+      return;
+    }
+
+    props.onRenamePerson(personRenameId, tempPersonName);
     setPersonRenameId(undefined);
     setTempPersonName(undefined);
   };
 
   const onRenameCancel = () => {
+    if (personRenameId) {
+      deleteNoNamePerson(personRenameId);
+    }
+
     setPersonRenameId(undefined);
     setTempPersonName(undefined);
+    setShowInvalidNameError(false);
   };
 
   const getDefaultItem = (person: Person) => {
@@ -153,16 +178,26 @@ export default function PersonsList(props: PersonsListProps) {
   };
 
   const getRenameItem = (person: Person) => {
+    const isInvalidName = showInvalidNameError && !tempPersonName;
+    const inputClassName =
+      'standup-person-rename-input' + (isInvalidName ? ' standup-invalid-name' : '');
+    const errorMsg = isInvalidName ? (
+      <span className="standup-name-error">A name is required.</span>
+    ) : null;
+
     return (
       <li key={person.id}>
-        <input
-          className="standup-person-rename-input"
-          onChange={onTempPersonNameChange}
-          onKeyDown={onRenameKeyDown}
-          ref={renameInputFocusRef}
-          type="text"
-          value={tempPersonName}
-        />
+        <div className="standup-person-rename-input-container">
+          <input
+            className={inputClassName}
+            onChange={onTempPersonNameChange}
+            onKeyDown={onRenameKeyDown}
+            ref={renameInputFocusRef}
+            type="text"
+            value={tempPersonName}
+          />
+          {errorMsg}
+        </div>
         <div className="standup-person-rename-actions">
           <button onClick={onRenameConfirm}>
             <FontAwesomeIcon icon={faCheck} />

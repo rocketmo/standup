@@ -168,6 +168,7 @@ export default function App() {
   // Save persons whenever the list is updated
   useEffect(() => {
     for (const person of persons) {
+      if (!person.name) continue; // Don't save if the person has not been named
       savePerson(person);
     }
   }, [persons]);
