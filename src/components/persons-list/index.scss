@@ -120,29 +120,38 @@
       }
     }
 
+    &.standup-rename-list-item {
+      display: block;
+    }
+
     .standup-person-rename-input-container {
-      flex: 1 0 auto;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
 
       .standup-person-rename-input {
         color: #222;
+        flex: 1 0 auto;
         padding: 4px 8px;
         width: auto;
 
-        &.standup-invalid-name {
+        &.standup-invalid-input {
           border: 1px solid #ff0000;
         }
       }
 
-      .standup-name-error {
-        color: #f00;
-        display: block;
-        font-size: 14px;
-        margin-top: 4px;
+      .standup-person-rename-actions {
+        flex: 1 0 auto;
       }
     }
 
-    .standup-person-rename-actions {
-      flex: 1 0 auto;
+    .standup-error-msg {
+      color: #f00;
+      font-size: 14px;
+      margin-top: 4px;
     }
   }
 }
