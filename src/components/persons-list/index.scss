@@ -51,10 +51,6 @@
 
     &:nth-child(odd) {
       background-color: #eee;
-
-      &.standup-person-completed {
-        background-color: #aaa;
-      }
     }
 
     &:last-child {
@@ -70,9 +66,8 @@
     }
 
     &.standup-person-completed {
-      background-color: #bbb;
-
       .standup-person span {
+        opacity: 0.3;
         text-decoration: line-through;
       }
     }
@@ -92,6 +87,7 @@
 
     .standup-person {
       flex: 1 0 auto;
+      font-weight: 400;
       padding: 4px 4px 4px 0;
       text-align: left;
       width: 0; // Actual width is determined by flex
@@ -102,6 +98,11 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         width: 100%;
+      }
+
+      &:hover {
+        font-weight: 500;
+        opacity: 1;
       }
     }
 
