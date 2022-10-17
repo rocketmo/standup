@@ -20,6 +20,7 @@
     "idb": "^7.1.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "uuid": "^9.0.0"
   },
@@ -34,6 +35,7 @@
     "@types/chrome": "0.0.198",
     "@types/lodash": "^4.14.186",
     "@types/react": "^18.0.21",
+    "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-dom": "^18.0.6",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.39.0",

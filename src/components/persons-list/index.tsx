@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import cloneDeep from 'lodash/cloneDeep';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheck,
@@ -11,6 +12,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import {
+  DragDropContext,
+  Draggable,
+  DraggableProvided,
+  Droppable,
+  DroppableProvided,
+  DropResult,
+} from 'react-beautiful-dnd';
 import { getPersonIndex } from '../../util';
 import type { Person } from '../../util/types';
 import './index.scss';
@@ -21,6 +30,7 @@ interface PersonsListProps {
   onAddPerson: () => Person;
   onClear: () => void;
   onDeletePerson: (personId: string) => void;
+  onMovePerson: (personId: string, moveIndex: number) => void;
   onRenamePerson: (personId: string, newName: string) => void;
   onRestart: () => void;
   onSelectNextPerson: (personId: string) => void;
@@ -35,6 +45,18 @@ export default function PersonsList(props: PersonsListProps) {
   const [personRenameId, setPersonRenameId] = useState<undefined | string>(undefined);
   const [tempPersonName, setTempPersonName] = useState<undefined | string>(undefined);
   const [showInvalidNameError, setShowInvalidNameError] = useState<boolean>(false);
+
+  const getSortedPersonsList = () => {
+    return cloneDeep(props.persons).sort((personA, personB) => {
+      if (personA.hasCompleted && !personB.hasCompleted) {
+        return 1;
+      } else if (!personA.hasCompleted && personB.hasCompleted) {
+        return -1;
+      }
+
+      return personA.index - personB.index;
+    });
+  };
 
   const renameInputFocusRef = useCallback((renameInput: HTMLInputElement | null) => {
     renameInput?.focus();
@@ -129,7 +151,7 @@ export default function PersonsList(props: PersonsListProps) {
     setShowInvalidNameError(false);
   };
 
-  const getDefaultItem = (person: Person) => {
+  const getDefaultItem = (person: Person, provided: DraggableProvided) => {
     const isOpen = !!personAnchor && person.id === personMenuId;
     const isHighlighted = person.id === props.activePersonId;
     let itemClass = '';
@@ -147,7 +169,12 @@ export default function PersonsList(props: PersonsListProps) {
     );
 
     return (
-      <li key={person.id} className={itemClass}>
+      <li
+        className={itemClass}
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+      >
         <button
           className="standup-person"
           onClick={props.onTogglePerson.bind(undefined, person.id)}
@@ -180,7 +207,49 @@ export default function PersonsList(props: PersonsListProps) {
     }
   };
 
-  const getRenameItem = (person: Person) => {
+  const moveCompletedPerson = (personsList: Person[], sourceIndex: number, destIndex: number) => {
+    const personId = personsList[sourceIndex].id;
+
+    // Moving the person up the list
+    if (destIndex < sourceIndex) {
+      // Don't allow the person to move into the incomplete persons section
+      while (destIndex < personsList.length - 1 && !personsList[destIndex].hasCompleted) {
+        destIndex += 1;
+      }
+    }
+
+    return props.onMovePerson(personId, personsList[destIndex].index);
+  };
+
+  const moveIncompletedPerson = (personsList: Person[], sourceIndex: number, destIndex: number) => {
+    const personId = personsList[sourceIndex].id;
+
+    // Moving the person down the list
+    if (destIndex > sourceIndex) {
+      // Don't allow the person to move into the completed persons section
+      while (destIndex > 0 && personsList[destIndex].hasCompleted) {
+        destIndex -= 1;
+      }
+    }
+
+    return props.onMovePerson(personId, personsList[destIndex].index);
+  };
+
+  const onDragEnd = (result: DropResult) => {
+    const { destination, source } = result;
+    if (!destination || destination.index === source.index) return;
+
+    const sortedList = getSortedPersonsList();
+    const movedPerson = sortedList[source.index];
+
+    if (movedPerson.hasCompleted) {
+      moveCompletedPerson(sortedList, source.index, destination.index);
+    } else {
+      moveIncompletedPerson(sortedList, source.index, destination.index);
+    }
+  };
+
+  const getRenameItem = (provided: DraggableProvided) => {
     const isInvalidName = showInvalidNameError && !tempPersonName;
     const inputClassName =
       'standup-person-rename-input' + (isInvalidName ? ' standup-invalid-input' : '');
@@ -189,7 +258,12 @@ export default function PersonsList(props: PersonsListProps) {
     ) : null;
 
     return (
-      <li key={person.id} className="standup-rename-list-item">
+      <li
+        className="standup-rename-list-item"
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+      >
         <div className="standup-person-rename-input-container">
           <input
             className={inputClassName}
@@ -214,19 +288,17 @@ export default function PersonsList(props: PersonsListProps) {
   };
 
   const getListItems = () => {
-    return props.persons
-      .sort((personA, personB) => {
-        if (personA.hasCompleted && !personB.hasCompleted) {
-          return 1;
-        } else if (!personA.hasCompleted && personB.hasCompleted) {
-          return -1;
-        }
-
-        return personA.index - personB.index;
-      })
-      .map((person) => {
-        return person.id === personRenameId ? getRenameItem(person) : getDefaultItem(person);
-      });
+    return getSortedPersonsList().map((person, index) => {
+      return (
+        <Draggable key={person.id} draggableId={person.id} index={index}>
+          {(provided: DraggableProvided) => {
+            return person.id === personRenameId
+              ? getRenameItem(provided)
+              : getDefaultItem(person, provided);
+          }}
+        </Draggable>
+      );
+    });
   };
 
   const getEmptyMessage = () => {
@@ -253,8 +325,8 @@ export default function PersonsList(props: PersonsListProps) {
     );
   };
 
-  const personListItems = props.persons.length ? getListItems() : getEmptyMessage();
   const topActionsBar = props.persons.length ? getTopActionsBar() : null;
+  const personListItems = props.persons.length ? getListItems() : getEmptyMessage();
 
   return (
     <div>
@@ -262,7 +334,16 @@ export default function PersonsList(props: PersonsListProps) {
         <h2 id="standup-up-next-header">Up next...</h2>
         {topActionsBar}
       </div>
-      <ul id="standup-person-list">{personListItems}</ul>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="standup-person-list">
+          {(provided: DroppableProvided) => (
+            <ul id="standup-person-list" ref={provided.innerRef} {...provided.droppableProps}>
+              {personListItems}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
       <button id="standup-add-person" onClick={onAddPersonClick}>
         <FontAwesomeIcon icon={faPlus} /> Add person
       </button>

@@ -79,6 +79,26 @@ export default function App() {
     deletePerson(personId);
   };
 
+  const onMovePerson = (personId: string, moveIndex: number) => {
+    setPersons((previousPersons) => {
+      // Sort the list first since it might be out of order
+      const newPersons = [...previousPersons];
+      newPersons.sort((personA, personB) => personA.index - personB.index);
+
+      // Move the person to their new position in the list
+      const prevPersonIndex = getPersonIndex(newPersons, personId);
+      const movedPerson = newPersons.splice(prevPersonIndex, 1);
+      newPersons.splice(moveIndex, 0, ...movedPerson);
+
+      // Update the indices of the persons
+      for (let personIndex = 0; personIndex < newPersons.length; personIndex += 1) {
+        newPersons[personIndex].index = personIndex;
+      }
+
+      return newPersons;
+    });
+  };
+
   const onRenamePerson = (personId: string, newName: string) => {
     setPersons((previousPersons) => {
       const personIndex = getPersonIndex(previousPersons, personId);
@@ -196,6 +216,7 @@ export default function App() {
         onAddPerson={onAddPerson}
         onClear={onClear}
         onDeletePerson={onDeletePerson}
+        onMovePerson={onMovePerson}
         onRenamePerson={onRenamePerson}
         onRestart={onRestart}
         onSelectNextPerson={onSelectNextPerson}
