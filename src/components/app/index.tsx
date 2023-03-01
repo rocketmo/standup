@@ -3,11 +3,13 @@ import shuffle from 'lodash/shuffle';
 import { v4 } from 'uuid';
 import ActiveBar from '../active-bar';
 import Header from '../header';
+import Icebreaker from '../icebreaker';
 import PersonsList from '../persons-list';
 import { loadPersons, deletePerson, savePerson } from '../../util/idb';
 import { getPersonIndex } from '../../util';
 import { closeAllSwimLanes, highlightSwimLane } from '../../util/klondike';
 import type { Person } from '../../util/types';
+import './index.scss';
 
 export default function App() {
   const [hasLoadedPersons, setHasLoadedPersons] = useState<boolean>(false);
@@ -207,7 +209,7 @@ export default function App() {
   }
 
   return (
-    <div>
+    <div id="standup-container">
       <Header />
       {activeBar}
       <PersonsList
@@ -223,6 +225,7 @@ export default function App() {
         onShuffle={onShuffle}
         onTogglePerson={onTogglePerson}
       />
+      <Icebreaker />
     </div>
   );
 }
