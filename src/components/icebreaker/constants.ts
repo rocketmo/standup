@@ -90,7 +90,7 @@ export const ICE_BREAKERS: string[] = [
   "What's something you're looking forward to?",
   "What's the most creative thing you've done?",
   'What are you hilariously bad at?',
-  'Tell me about a time you were totally out of your element/comfort zone.',
+  'What was a time you were totally out of your element/comfort zone.',
   'Are you a cat or dog person or neither? Why?',
   'What kind of people do you most enjoy hanging out with?',
   'What do you think the ideal age to be is?',
