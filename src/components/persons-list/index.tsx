@@ -329,7 +329,7 @@ export default function PersonsList(props: PersonsListProps) {
   const personListItems = props.persons.length ? getListItems() : getEmptyMessage();
 
   return (
-    <div>
+    <div id="standup-person-list-container">
       <div id="standup-person-list-header">
         <h2 id="standup-up-next-header">Up next...</h2>
         {topActionsBar}

@@ -1,5 +1,5 @@
 body.standup-body {
-  padding-right: 300px !important;
+  padding-right: 330px !important;
   width: auto !important;
 }
 
@@ -14,11 +14,15 @@ body.standup-body {
   position: fixed !important;
   right: 0px !important;
   top: 0px !important;
-  width: 300px !important;
+  width: 330px !important;
   z-index: 1000 !important;
 }
 
 #standup-sidebar.standup-hidden {
   display: none !important;
   width: 0px !important;
+}
+
+#standup-sidebar #standup-root {
+  height: 100vh;
 }

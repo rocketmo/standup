@@ -1,3 +1,8 @@
+#standup-person-list-container {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
 #standup-person-list-header {
   align-items: center;
   color: #222;
@@ -146,7 +151,7 @@
       }
 
       .standup-person-rename-actions {
-        flex: 1 0 auto;
+        flex: 0 1 auto;
       }
     }
 

@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'jsx-a11y/no-autofocus': 'off',
     'no-unused-vars': 'off',
     'react-hooks/rules-of-hooks': 'error',
