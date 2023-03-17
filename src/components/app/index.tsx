@@ -27,12 +27,12 @@ export default function App() {
     }
   }, [persons]);
 
-  const onAddPerson = () => {
+  const onAddPerson = (name: '') => {
     const newPerson = {
       hasCompleted: false,
       id: v4(),
       index: persons.length,
-      name: '',
+      name,
     };
 
     setPersons((previousPersons) => [...previousPersons, newPerson]);
