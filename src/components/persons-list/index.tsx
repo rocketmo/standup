@@ -316,7 +316,7 @@ export default function PersonsList(props: PersonsListProps) {
 
       // Ignore last element as it's "Unassigned"
       for(let index = 0; index < otherAssignees.length - 1; index++){
-        props.onAddPerson(otherAssignees[index].children[2].textContent!)
+        props.onAddPerson(otherAssignees[index].children[2].textContent!);
       }
       showMore.click();
     };
