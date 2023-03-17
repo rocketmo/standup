@@ -7,7 +7,7 @@ import Icebreaker from '../icebreaker';
 import PersonsList from '../persons-list';
 import { loadPersons, deletePerson, savePerson } from '../../util/idb';
 import { getPersonIndex } from '../../util';
-import { closeAllSwimLanes, highlightSwimLane } from '../../util/klondike';
+import { closePeopleFilters, highlightPerson } from '../../util/klondike';
 import type { Person } from '../../util/types';
 import './index.scss';
 
@@ -21,9 +21,9 @@ export default function App() {
     setActivePersonId(nextPerson?.id);
 
     if (nextPerson) {
-      highlightSwimLane(nextPerson.name);
+      highlightPerson(nextPerson.name);
     } else {
-      closeAllSwimLanes();
+      closePeopleFilters();
     }
   }, [persons]);
 
@@ -130,7 +130,7 @@ export default function App() {
     const prevActivePersonId = activePersonId;
     const nextPerson = persons[personIndex];
     setActivePersonId(personId);
-    highlightSwimLane(nextPerson.name);
+    highlightPerson(nextPerson.name);
 
     setPersons((previousPersons) => {
       return previousPersons.map((person) => {
