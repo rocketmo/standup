@@ -27,7 +27,7 @@ export default function App() {
     }
   }, [persons]);
 
-  const onAddPerson = (name: '') => {
+  const onAddPerson = (name = '') => {
     const newPerson = {
       hasCompleted: false,
       id: v4(),
@@ -120,7 +120,7 @@ export default function App() {
       });
     });
 
-    setActivePersonId(undefined);
+    closePeopleFilters();
   };
 
   const onSelectNextPerson = (personId: string) => {

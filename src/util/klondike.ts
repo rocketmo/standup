@@ -137,8 +137,7 @@ function checkAssignee(personName: string): void {
     const assigneeName = assignee.children[2].textContent!;
     if (doesNameMatchHeader(personName, assigneeName)) {
       assignee.click();
-      showMore.click();
-      return;
+      break;
     }
   }
   showMore.click();
