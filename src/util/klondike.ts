@@ -1,10 +1,24 @@
-export function highlightSwimLane(personName: string): void {
-  closeAllSwimLanes();
-  const personHeader = openSwimLane(personName);
-  scrollToHeader(personHeader);
+export function highlightPerson(personName: string): void {
+  if (usesSwimLanes()) {
+    closeAllSwimLanes();
+    const personHeader = openSwimLane(personName);
+    scrollToHeader(personHeader);
+  } else {
+    // Otherwise use assignee filter instead
+    uncheckAssignees();
+    checkAssignee(personName);
+  }
 }
 
-export function closeAllSwimLanes(): void {
+export function closePeopleFilters(): void {
+  if (usesSwimLanes()) {
+    closeAllSwimLanes();
+  } else {
+    uncheckAssignees();
+  }
+}
+
+function closeAllSwimLanes(): void {
   const expanders = document.querySelectorAll<HTMLButtonElement>(
     '.ghx-swimlane:not(.ghx-closed) .ghx-expander',
   );
@@ -75,4 +89,56 @@ function doesNameMatchHeader(personName: string, headerText: string): boolean {
   }
 
   return true;
+}
+
+function usesSwimLanes(): boolean {
+  return document.querySelector('.ghx-swimlane-header') !== null;
+}
+
+function uncheckAssignees(): void {
+  const checkedAssignees = document.querySelectorAll<HTMLInputElement>(
+    'input[name="ASSIGNEE"]:checked',
+  );
+  checkedAssignees.forEach((checkedAssignees) => checkedAssignees.click());
+
+  const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more');
+  if (!showMore) return;
+
+  showMore.click();
+  const otherAssignees = document.querySelectorAll<HTMLSpanElement>(
+    "span[data-role='droplistItem'][aria-checked='true']",
+  );
+
+  otherAssignees.forEach((checkedAssignees) => checkedAssignees.click());
+  showMore.click();
+}
+
+function checkAssignee(personName: string): void {
+  const assignees = document.querySelectorAll<HTMLElement>(
+    "label[data-test-id='common.issue-filter-bar.assignee-filter-avatar'] span[role='img']",
+  );
+  for (let index = 0; index < assignees.length; index++) {
+    const assignee = assignees[index];
+    const assigneeName = assignee.getAttribute('aria-label')!;
+    if (doesNameMatchHeader(personName, assigneeName)) {
+      assignee.click();
+      return;
+    }
+  }
+  const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more');
+  if (!showMore) return;
+
+  showMore.click();
+  const otherAssignees = document.querySelectorAll<HTMLSpanElement>(
+    "span[data-role='droplistItem']",
+  );
+  for (let index = 0; index < otherAssignees.length; index++) {
+    const assignee = otherAssignees[index];
+    const assigneeName = assignee.children[2].textContent!;
+    if (doesNameMatchHeader(personName, assigneeName)) {
+      assignee.click();
+      break;
+    }
+  }
+  showMore.click();
 }

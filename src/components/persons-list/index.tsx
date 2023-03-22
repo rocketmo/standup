@@ -27,7 +27,7 @@ import './index.scss';
 interface PersonsListProps {
   activePersonId?: string;
   persons: Person[];
-  onAddPerson: () => Person;
+  onAddPerson: (name?: string) => Person;
   onClear: () => void;
   onDeletePerson: (personId: string) => void;
   onMovePerson: (personId: string, moveIndex: number) => void;
@@ -302,8 +302,37 @@ export default function PersonsList(props: PersonsListProps) {
   };
 
   const getEmptyMessage = () => {
+    const onImportClick = () => {
+      const assignees = document.querySelectorAll(
+        "label[data-test-id='common.issue-filter-bar.assignee-filter-avatar'] span[role='img']",
+      );
+      assignees.forEach((assignee) => {
+        props.onAddPerson(assignee.getAttribute('aria-label')!);
+      });
+
+      const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more');
+      if (!showMore) return;
+
+      showMore.click();
+      const otherAssignees = document.querySelectorAll("span[data-role='droplistItem']");
+
+      // Ignore last element as it's "Unassigned"
+      for (let index = 0; index < otherAssignees.length - 1; index++) {
+        props.onAddPerson(otherAssignees[index].children[2].textContent!);
+      }
+      showMore.click();
+    };
+
     const msgListItem = <li>Your standup is empty.</li>;
-    return [msgListItem];
+    const importFromActiveSprintItem = (
+      <li className="import-from-active-sprints">
+        <div>
+          <button onClick={onImportClick}>Import from active sprints</button>
+        </div>
+      </li>
+    );
+
+    return [msgListItem, importFromActiveSprintItem];
   };
 
   const getTopActionsBar = () => {
