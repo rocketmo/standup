@@ -120,6 +120,7 @@ export default function App() {
       });
     });
 
+    setActivePersonId(undefined);
     closePeopleFilters();
   };
 
