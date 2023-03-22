@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'jsx-a11y/no-autofocus': 'off',
+    'jsx-a11y/anchor-is-valid': 'warn',
     'no-unused-vars': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',

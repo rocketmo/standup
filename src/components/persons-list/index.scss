@@ -78,8 +78,9 @@
       }
     }
 
-    &.import-from-active-sprints {
-      background-color: #7bca6e;
+    a.import-from-active-sprints {
+      color: #666;
+      font-style: italic;
     }
 
     button {

@@ -323,16 +323,18 @@ export default function PersonsList(props: PersonsListProps) {
       showMore.click();
     };
 
-    const msgListItem = <li>Your standup is empty.</li>;
-    const importFromActiveSprintItem = (
-      <li className="import-from-active-sprints">
-        <div>
-          <button onClick={onImportClick}>Import from active sprints</button>
-        </div>
+    const msgListItem = (
+      <li>
+        <span>
+          Your standup is empty.&nbsp;
+          <a className="import-from-active-sprints" href="javascript:void" onClick={onImportClick}>
+            Click here to import from active sprints.
+          </a>
+        </span>
       </li>
     );
 
-    return [msgListItem, importFromActiveSprintItem];
+    return [msgListItem];
   };
 
   const getTopActionsBar = () => {
