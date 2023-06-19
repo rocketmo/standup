@@ -78,6 +78,10 @@
       }
     }
 
+    .empty-list-msg {
+      color: #222;
+    }
+
     a.import-from-active-sprints {
       color: #666;
       font-style: italic;
@@ -145,6 +149,7 @@
       width: 100%;
 
       .standup-person-rename-input {
+        background-color: #fff;
         color: #222;
         flex: 1 0 auto;
         padding: 4px 8px;
