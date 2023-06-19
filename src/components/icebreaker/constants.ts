@@ -150,7 +150,7 @@ export const ICE_BREAKERS: string[] = [
   'If you never had to sleep, what would you do with all those extra hours each day?',
   "What's the story behind your name?",
   'What job would you be terrible at?',
-  'Would you rather have a fresh haircut but smell like 💩, or have a 💩 haircut but smell fresh?',
+  'Would you rather have a fresh haircut but smell like garbage, or have a garbage haircut but smell fresh?',
   'Would you rather live forever but have a boring life, or live a short but amazing life?',
   'If you could live anywhere in the world for a year, where would it be?',
   'If you could commit any crime and get away with it, what would you choose and why?',
@@ -160,7 +160,7 @@ export const ICE_BREAKERS: string[] = [
   'What was the last song you listened to?',
   'What was your best class in school?',
   "What is one bad habit you're trying to stop or have already stopped recently?",
+  'What is your favorite letter of the alphabet?',
   'What characteristic do you value the most in your coworkers?',
   'Who on the team would you like to swap jobs with for a day?',
-  'What is your favorite letter of the alphabet?',
 ];
