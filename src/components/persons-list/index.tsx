@@ -304,28 +304,31 @@ export default function PersonsList(props: PersonsListProps) {
   const getEmptyMessage = () => {
     const onImportClick = () => {
       const assignees = document.querySelectorAll(
-        "label[data-test-id='common.issue-filter-bar.assignee-filter-avatar'] span[role='img']",
+        "label[data-testid='common.issue-filter-bar.assignee-filter-avatar'] img",
       );
       assignees.forEach((assignee) => {
-        props.onAddPerson(assignee.getAttribute('aria-label')!);
+        const assigneeName = assignee.getAttribute('alt');
+        if (assigneeName) props.onAddPerson(assigneeName);
       });
 
       const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more');
       if (!showMore) return;
 
       showMore.click();
-      const otherAssignees = document.querySelectorAll("span[data-role='droplistItem']");
+      const otherAssignees = document.querySelectorAll(
+        ".atlaskit-portal-container button[role='checkbox'] img",
+      );
 
-      // Ignore last element as it's "Unassigned"
-      for (let index = 0; index < otherAssignees.length - 1; index++) {
-        props.onAddPerson(otherAssignees[index].children[2].textContent!);
+      for (let index = 0; index < otherAssignees.length; index++) {
+        const assigneeName = otherAssignees[index].getAttribute('alt');
+        if (assigneeName) props.onAddPerson(assigneeName);
       }
       showMore.click();
     };
 
     const msgListItem = (
       <li>
-        <span>
+        <span className="empty-list-msg">
           Your standup is empty.&nbsp;
           <a className="import-from-active-sprints" href="javascript:void" onClick={onImportClick}>
             Click here to import from active sprints.
