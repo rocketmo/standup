@@ -73,7 +73,13 @@ function scrollToHeader(personHeader?: HTMLElement): void {
 }
 
 function doesNameMatchHeader(personName: string, headerText: string): boolean {
-  const personTerms = personName.toLowerCase().split(/\W+/);
+  // Ignore anything in the person's name following a comma, a double quote, or a left paren
+  // (so that nicknames can be used for that person).
+  const personTerms = personName
+    .toLowerCase()
+    .split(/[,\"\(]/)[0]
+    .split(/\W+/);
+
   const headerTerms = headerText.toLowerCase().split(/\W+/);
 
   for (const personTerm of personTerms) {
@@ -106,7 +112,7 @@ function uncheckAssignees(): void {
 
   showMore.click();
   const otherAssignees = document.querySelectorAll<HTMLSpanElement>(
-    "span[data-role='droplistItem'][aria-checked='true']",
+    ".atlaskit-portal-container button[role='checkbox'][aria-checked='true']",
   );
 
   otherAssignees.forEach((checkedAssignees) => checkedAssignees.click());
@@ -115,12 +121,12 @@ function uncheckAssignees(): void {
 
 function checkAssignee(personName: string): void {
   const assignees = document.querySelectorAll<HTMLElement>(
-    "label[data-test-id='common.issue-filter-bar.assignee-filter-avatar'] span[role='img']",
+    "label[data-testid='common.issue-filter-bar.assignee-filter-avatar'] img",
   );
   for (let index = 0; index < assignees.length; index++) {
     const assignee = assignees[index];
-    const assigneeName = assignee.getAttribute('aria-label')!;
-    if (doesNameMatchHeader(personName, assigneeName)) {
+    const assigneeName = assignee.getAttribute('alt');
+    if (assigneeName && doesNameMatchHeader(personName, assigneeName)) {
       assignee.click();
       return;
     }
@@ -129,13 +135,13 @@ function checkAssignee(personName: string): void {
   if (!showMore) return;
 
   showMore.click();
-  const otherAssignees = document.querySelectorAll<HTMLSpanElement>(
-    "span[data-role='droplistItem']",
+  const otherAssignees = document.querySelectorAll<HTMLElement>(
+    ".atlaskit-portal-container button[role='checkbox'] img",
   );
   for (let index = 0; index < otherAssignees.length; index++) {
     const assignee = otherAssignees[index];
-    const assigneeName = assignee.children[2].textContent!;
-    if (doesNameMatchHeader(personName, assigneeName)) {
+    const assigneeName = otherAssignees[index].getAttribute('alt');
+    if (assigneeName && doesNameMatchHeader(personName, assigneeName)) {
       assignee.click();
       break;
     }

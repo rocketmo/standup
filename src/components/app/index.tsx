@@ -7,7 +7,7 @@ import Icebreaker from '../icebreaker';
 import PersonsList from '../persons-list';
 import { loadPersons, deletePerson, savePerson } from '../../util/idb';
 import { getPersonIndex } from '../../util';
-import { closePeopleFilters, highlightPerson } from '../../util/klondike';
+import { closePeopleFilters, highlightPerson } from '../../util/jira';
 import type { Person } from '../../util/types';
 import './index.scss';
 
