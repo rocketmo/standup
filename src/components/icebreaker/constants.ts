@@ -162,5 +162,6 @@ export const ICE_BREAKERS: string[] = [
   "What is one bad habit you're trying to stop or have already stopped recently?",
   'What is your favorite letter of the alphabet?',
   'What characteristic do you value the most in your coworkers?',
-  'Who on the team would you like to swap jobs with for a day?',
+  'Who in your team/company would you like to swap jobs with for a day?',
+  'Cake or pie?',
 ];
