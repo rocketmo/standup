@@ -164,4 +164,8 @@ export const ICE_BREAKERS: string[] = [
   'What characteristic do you value the most in your coworkers?',
   'Who in your team/company would you like to swap jobs with for a day?',
   'Cake or pie?',
+  'If there was movie about your life, which actor would play you?',
+  'If you were a character in SpongeBob SquarePants, which one would you be?',
+  'If you were a character in Shrek, which one would you be?',
+  'What is your favourite theme park ride?',
 ];
