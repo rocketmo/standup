@@ -1,3 +1,6 @@
+// TODO: Remove old selectors once enhanced Jira is the default
+// TODO: Fix assignee filter method of highlighting
+
 export function highlightPerson(personName: string): void {
   if (usesSwimLanes()) {
     closeAllSwimLanes();
@@ -19,8 +22,11 @@ export function closePeopleFilters(): void {
 }
 
 function closeAllSwimLanes(): void {
+  const originalSelector = '.ghx-swimlane:not(.ghx-closed) .ghx-expander';
+  const enhancedSelector =
+    '[data-test-id="platform-board-kit.ui.swimlane.swimlane-wrapper"] > div[role="button"][aria-expanded="true"]';
   const expanders = document.querySelectorAll<HTMLButtonElement>(
-    '.ghx-swimlane:not(.ghx-closed) .ghx-expander',
+    `${originalSelector}, ${enhancedSelector}`,
   );
 
   for (let expanderIdx = 0; expanderIdx < expanders.length; expanderIdx += 1) {
@@ -30,13 +36,29 @@ function closeAllSwimLanes(): void {
 }
 
 function openSwimLane(personName: string): HTMLElement | undefined {
-  const headers = document.querySelectorAll<HTMLElement>('.ghx-swimlane-header');
+  const originalSelector = '.ghx-swimlane-header';
+  const enhancedSelector =
+    '[data-test-id="platform-board-kit.ui.swimlane.swimlane-wrapper"] > div[role="button"]';
+  const headers = document.querySelectorAll<HTMLElement>(
+    `${originalSelector}, ${enhancedSelector}`,
+  );
   let defaultHeader: HTMLElement | null | undefined;
 
   for (let headerIdx = 0; headerIdx < headers.length; headerIdx += 1) {
     const header = headers[headerIdx];
-    const headerTextElement = header.querySelector('.ghx-heading span');
-    const headerText = headerTextElement?.textContent || '';
+    const originalTextElement = header.querySelector('.ghx-heading span');
+    const enhancedTextElement1 = header.querySelector(
+      '[data-test-id="platform-board-kit.ui.swimlane.swimlane-content"] > div > div:nth-child(2)',
+    );
+    const enhancedTextElement2 = header.querySelector(
+      '[data-test-id="platform-board-kit.ui.swimlane.swimlane-content"] > div > div:nth-child(3)',
+    );
+
+    const headerText =
+      originalTextElement?.textContent?.trim() ||
+      enhancedTextElement1?.textContent?.trim() ||
+      enhancedTextElement2?.textContent?.trim() ||
+      '';
 
     if (doesNameMatchHeader(personName, headerText)) {
       const expander = getExpanderFromHeader(header);
@@ -56,20 +78,37 @@ function openSwimLane(personName: string): HTMLElement | undefined {
 }
 
 function getExpanderFromHeader(personHeader: HTMLElement): HTMLButtonElement | null {
-  return personHeader.querySelector<HTMLButtonElement>('.ghx-expander');
+  return (
+    personHeader.querySelector<HTMLButtonElement>('.ghx-expander') ||
+    (personHeader as HTMLButtonElement)
+  );
 }
 
 function scrollToHeader(personHeader?: HTMLElement): void {
   if (!personHeader) return;
 
-  const poolColumns = document.getElementById('ghx-pool-column');
+  const originalBoard = document.querySelector('#ghx-pool-column');
+  const enhancedBoard = document.querySelector(
+    '[data-test-id="platform-board-kit.ui.board.scroll.board-scroll"]',
+  );
+
   const headerHeight = personHeader.offsetHeight;
   const columnsYOffset = (personHeader.nextElementSibling as HTMLElement)?.offsetTop || 0;
-  poolColumns?.scrollTo({
-    behavior: 'smooth',
-    left: 0,
-    top: columnsYOffset - headerHeight,
-  });
+
+  if (originalBoard) {
+    originalBoard.scrollTo({
+      behavior: 'smooth',
+      left: 0,
+      top: columnsYOffset - headerHeight,
+    });
+  } else if (enhancedBoard) {
+    const doubleHeaderHeight = 2 * headerHeight;
+    enhancedBoard.scrollTo({
+      behavior: 'smooth',
+      left: 0,
+      top: columnsYOffset - doubleHeaderHeight,
+    });
+  }
 }
 
 function doesNameMatchHeader(personName: string, headerText: string): boolean {
@@ -98,7 +137,13 @@ function doesNameMatchHeader(personName: string, headerText: string): boolean {
 }
 
 function usesSwimLanes(): boolean {
-  return document.querySelector('.ghx-swimlane-header') !== null;
+  const enhancedSwimlaneSelector =
+    '[data-test-id="platform-board-kit.ui.swimlane.swimlane-wrapper"]';
+
+  return (
+    document.querySelector('.ghx-swimlane-header') !== null ||
+    document.querySelectorAll(enhancedSwimlaneSelector).length > 0
+  );
 }
 
 function uncheckAssignees(): void {
