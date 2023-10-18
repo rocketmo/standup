@@ -1,5 +1,4 @@
 // TODO: Remove old selectors once enhanced Jira is the default
-// TODO: Fix assignee filter method of highlighting
 
 export function highlightPerson(personName: string): void {
   if (usesSwimLanes()) {
@@ -148,16 +147,21 @@ function usesSwimLanes(): boolean {
 
 function uncheckAssignees(): void {
   const checkedAssignees = document.querySelectorAll<HTMLInputElement>(
-    'input[name="ASSIGNEE"]:checked',
+    'input[name="ASSIGNEE"]:checked, input[name="assignee"]:checked',
   );
   checkedAssignees.forEach((checkedAssignees) => checkedAssignees.click());
 
-  const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more');
+  const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more, #assignee-show-more');
   if (!showMore) return;
 
   showMore.click();
+
+  const originalOtherSelector =
+    ".atlaskit-portal-container button[role='checkbox'][aria-checked='true']";
+  const enhancedOtherSelector =
+    ".atlaskit-portal-container button[role='menuitemcheckbox'][aria-checked='true']";
   const otherAssignees = document.querySelectorAll<HTMLSpanElement>(
-    ".atlaskit-portal-container button[role='checkbox'][aria-checked='true']",
+    `${originalOtherSelector}, ${enhancedOtherSelector}`,
   );
 
   otherAssignees.forEach((checkedAssignees) => checkedAssignees.click());
@@ -165,8 +169,12 @@ function uncheckAssignees(): void {
 }
 
 function checkAssignee(personName: string): void {
+  const originalAvatarSelector =
+    "label[data-testid='common.issue-filter-bar.assignee-filter-avatar'] img";
+  const enhancedAvatarSelector =
+    "label[data-test-id='filters.ui.filters.assignee.stateless.avatar.assignee-filter-avatar'] img";
   const assignees = document.querySelectorAll<HTMLElement>(
-    "label[data-testid='common.issue-filter-bar.assignee-filter-avatar'] img",
+    `${originalAvatarSelector}, ${enhancedAvatarSelector}`,
   );
   for (let index = 0; index < assignees.length; index++) {
     const assignee = assignees[index];
@@ -176,13 +184,16 @@ function checkAssignee(personName: string): void {
       return;
     }
   }
-  const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more');
+  const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more, #assignee-show-more');
   if (!showMore) return;
 
   showMore.click();
+  const originalOtherSelector = ".atlaskit-portal-container button[role='checkbox'] img";
+  const enhancedOtherSelector = ".atlaskit-portal-container button[role='menuitemcheckbox'] img";
   const otherAssignees = document.querySelectorAll<HTMLElement>(
-    ".atlaskit-portal-container button[role='checkbox'] img",
+    `${originalOtherSelector}, ${enhancedOtherSelector}`,
   );
+
   for (let index = 0; index < otherAssignees.length; index++) {
     const assignee = otherAssignees[index];
     const assigneeName = otherAssignees[index].getAttribute('alt');

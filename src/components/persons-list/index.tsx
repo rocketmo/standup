@@ -303,20 +303,31 @@ export default function PersonsList(props: PersonsListProps) {
 
   const getEmptyMessage = () => {
     const onImportClick = () => {
+      // TODO: Remove old selectors once enhanced Jira is the default
+      const originalAvatarSelector =
+        "label[data-testid='common.issue-filter-bar.assignee-filter-avatar'] img";
+      const enhancedAvatarSelector =
+        "label[data-test-id='filters.ui.filters.assignee.stateless.avatar.assignee-filter-avatar'] img";
       const assignees = document.querySelectorAll(
-        "label[data-testid='common.issue-filter-bar.assignee-filter-avatar'] img",
+        `${originalAvatarSelector}, ${enhancedAvatarSelector}`,
       );
       assignees.forEach((assignee) => {
         const assigneeName = assignee.getAttribute('alt');
         if (assigneeName) props.onAddPerson(assigneeName);
       });
 
-      const showMore = document.querySelector<HTMLElement>('#ASSIGNEE-show-more');
+      const showMore = document.querySelector<HTMLElement>(
+        '#ASSIGNEE-show-more, #assignee-show-more',
+      );
       if (!showMore) return;
 
       showMore.click();
+
+      const originalOtherSelector = ".atlaskit-portal-container button[role='checkbox'] img";
+      const enhancedOtherSelector =
+        ".atlaskit-portal-container button[role='menuitemcheckbox'] img";
       const otherAssignees = document.querySelectorAll(
-        ".atlaskit-portal-container button[role='checkbox'] img",
+        `${originalOtherSelector}, ${enhancedOtherSelector}`,
       );
 
       for (let index = 0; index < otherAssignees.length; index++) {
