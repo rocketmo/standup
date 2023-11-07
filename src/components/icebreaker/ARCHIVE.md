@@ -32,3 +32,4 @@ Below is a list of icebreakers already used in a previous standup.
 * Who is the most interesting person on your team?
 * Would you rather have a fresh haircut but smell like garbage, or have a garbage haircut but smell fresh?
 * Would you rather have hands for feet or feet for hands?
+* Would you rather have wings or breathe underwater?

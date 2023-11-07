@@ -101,7 +101,6 @@ export const ICE_BREAKERS: string[] = [
   'How often do you work from your bed?',
   'Who on the team is most likely to write a book?',
   'What was the moment you realised you were officially an adult?',
-  'Would you rather have wings or breathe underwater?',
   'What do you think was the most important invention in history?',
   'Name one colleague who is the most likely to escape a deserted island alive?',
   'If given the opportunity to be the boss for a day, which is the first thing you would do?',
