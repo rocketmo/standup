@@ -151,4 +151,5 @@ export const ICE_BREAKERS: string[] = [
   'What is your favorite self-care activity?',
   'What is your favourite trend to come out of the past 10 years?',
   'What outdated slang do you still use?',
+  'What was the kindest thing a stranger ever did for you?',
 ];
