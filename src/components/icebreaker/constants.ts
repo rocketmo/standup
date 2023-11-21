@@ -157,7 +157,7 @@ export const ICE_BREAKERS: string[] = [
   "What's your favourite tradition?",
   'Pick the person whose turn is next. What is something that they say/do often?',
   'How do you like to eat your eggs?',
-  'How do you like to eat fries - with ketchup, mayo, or plain?',
+  'Which condiment do you like to eat fries with?',
   'Do you collect anything?',
   'If you could set up a chat between 2 famous people (dead or alive), who would you pick?',
   'What was your least favourite food as a child? Do you still hate it or do you love it now?',
