@@ -7,7 +7,7 @@ import Icebreaker from '../icebreaker';
 import PersonsList from '../persons-list';
 import { loadPersons, deletePerson, savePerson } from '../../util/idb';
 import { getPersonIndex } from '../../util';
-import { closePeopleFilters, highlightPerson } from '../../util/jira';
+import { highlightPerson, uncheckAssignees } from '../../util/jira';
 import type { Person } from '../../util/types';
 import './index.scss';
 
@@ -23,7 +23,7 @@ export default function App() {
     if (nextPerson) {
       highlightPerson(nextPerson.name);
     } else {
-      closePeopleFilters();
+      uncheckAssignees();
     }
   }, [persons]);
 
@@ -121,7 +121,7 @@ export default function App() {
     });
 
     setActivePersonId(undefined);
-    closePeopleFilters();
+    uncheckAssignees();
   };
 
   const onSelectNextPerson = (personId: string) => {

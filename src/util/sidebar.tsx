@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from '../components/app';
 
 const BODY_CLASS = 'standup-body';
@@ -11,7 +11,9 @@ const SIDEBAR_ID = 'standup-sidebar';
  * Renders the standup application within the sidebar.
  */
 function renderApplication() {
-  ReactDOM.render(<App />, document.getElementById(ROOT_ID));
+  const container = document.getElementById(ROOT_ID);
+  const root = createRoot(container!);
+  root.render(<App />);
 }
 
 /**
