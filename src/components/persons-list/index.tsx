@@ -303,14 +303,9 @@ export default function PersonsList(props: PersonsListProps) {
 
   const getEmptyMessage = () => {
     const onImportClick = () => {
-      // TODO: Remove old selectors once enhanced Jira is the default
-      const originalAvatarSelector =
-        "label[data-testid='common.issue-filter-bar.assignee-filter-avatar'] img";
-      const enhancedAvatarSelector =
+      const avatarSelector =
         "label[data-test-id='filters.ui.filters.assignee.stateless.avatar.assignee-filter-avatar'] img";
-      const assignees = document.querySelectorAll(
-        `${originalAvatarSelector}, ${enhancedAvatarSelector}`,
-      );
+      const assignees = document.querySelectorAll(avatarSelector);
       assignees.forEach((assignee) => {
         const assigneeName = assignee.getAttribute('alt');
         if (assigneeName) props.onAddPerson(assigneeName);
@@ -323,12 +318,8 @@ export default function PersonsList(props: PersonsListProps) {
 
       showMore.click();
 
-      const originalOtherSelector = ".atlaskit-portal-container button[role='checkbox'] img";
-      const enhancedOtherSelector =
-        ".atlaskit-portal-container button[role='menuitemcheckbox'] img";
-      const otherAssignees = document.querySelectorAll(
-        `${originalOtherSelector}, ${enhancedOtherSelector}`,
-      );
+      const otherSelector = ".atlaskit-portal-container button[role='menuitemcheckbox'] img";
+      const otherAssignees = document.querySelectorAll(otherSelector);
 
       for (let index = 0; index < otherAssignees.length; index++) {
         const assigneeName = otherAssignees[index].getAttribute('alt');
