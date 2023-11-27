@@ -21,7 +21,7 @@ A chrome extension to help facilitate standup meetings in Jira.
 4. Open `chrome://extensions/` in Chrome.
 5. Enable developer mode.
 6. Click on the "Load unpacked" button.
-6. Select the folder that was unzipped.
+6. Select the unzipped `standup` folder.
 
 ## Updating the extension
 
@@ -35,6 +35,6 @@ A chrome extension to help facilitate standup meetings in Jira.
 
 1. Go to the [Releases](https://github.com/rocketmo/standup/releases) page.
 2. Find the latest release and download the `build.zip` file.
-3. Unzip that file and use the resulting folder to replace your existing `standup` folder.
+3. Unzip that file and replace your existing `standup` folder with the unzipped `standup` folder.
 4. Following the above steps should be sufficient, but if that does not work, try opening
 `chrome://extensions/` in Chrome, and reloading the extension.
