@@ -18,6 +18,7 @@ Below is a list of icebreakers already used in a previous standup.
 * If you could eliminate one thing from your daily routine, what would it be and why?
 * If you could have any superpower what would it be?
 * If you could live anywhere in the world for a year, where would it be?
+* If you could only wear one colour for the rest of your life, what colour would you wear?
 * If you could pick one coworker to switch lives with, who would it be?
 * If you could teleport anywhere in the world right now, where would you go?
 * If you could time travel, where is the first place you would go?
@@ -30,14 +31,13 @@ Below is a list of icebreakers already used in a previous standup.
 * What are some of your guilty pleasures?
 * What are you grateful for?
 * What are you hilariously bad at?
-* What are your favorite snacks?
+* What are your favourite snacks?
 * What culture would you like to learn more about?
 * What did your teachers and parents say would be really important when you grew up, but it hasn't been?
 * What do you do to unwind after a hard day?
 * What do you geek out about?
 * What do you think was the most important invention in history?
 * What do you wish your phone could do?
-* What does your perfect breakfast look like?
 * What fashion trend needs to be brought back?
 * What food do you love that a lot of people might find a little odd?
 * What hard time in your life left you a better person after it was finished?
@@ -73,6 +73,7 @@ Below is a list of icebreakers already used in a previous standup.
 * What is your favourite meme or viral video?
 * What is your favourite month?
 * What is your favourite season?
+* What is your favourite self-care activity?
 * What is your favourite song?
 * What is your favourite thing about where you live?
 * What is your favourite tradition?
