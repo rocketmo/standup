@@ -20,7 +20,6 @@ export const ICE_BREAKERS: string[] = [
   'What do you want to do when you retire?',
   'What was your funniest or worst experience with a dentist?',
   'What TV show are you hooked on or were recently hooked on?',
-  'What is your favourite genre of movie? Why?',
   'What brands do you love/hate the most?',
   'Who was your favourite teacher?',
   'How often do you dance?',

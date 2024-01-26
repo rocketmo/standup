@@ -70,6 +70,7 @@ Below is a list of icebreakers already used in a previous standup.
 * What is your favourite animal?
 * What is your favourite food combination?
 * What is your favourite emoji?
+* What is your favourite genre of movie? Why?
 * What is your favourite genre of music?
 * What is your favourite international food?
 * What is your favourite letter of the alphabet?
