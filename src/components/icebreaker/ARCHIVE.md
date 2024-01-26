@@ -31,12 +31,15 @@ Below is a list of icebreakers already used in a previous standup.
 * What are some of your guilty pleasures?
 * What are you grateful for?
 * What are you hilariously bad at?
+* What are your favourite chips?
 * What are your favourite snacks?
 * What culture would you like to learn more about?
 * What did your teachers and parents say would be really important when you grew up, but it hasn't been?
 * What do you do to unwind after a hard day?
 * What do you geek out about?
+* What do you resent paying for most?
 * What do you think was the most important invention in history?
+* What do you wish someone taught you a long time ago?
 * What do you wish your phone could do?
 * What fashion trend needs to be brought back?
 * What food do you love that a lot of people might find a little odd?
@@ -91,12 +94,13 @@ Below is a list of icebreakers already used in a previous standup.
 * What toppings go on your pizza?
 * What type of person do you love working with the most?
 * What was something you got in trouble for as a kid?
+* What was something you thought would be easy until you tried it?
 * What was the funniest thing that happened to you at work?
 * What was the moment you realised you were officially an adult?
 * What was the most unique shop or restaurant you've been in?
 * What was the scariest movie you've seen?
-* What was something you thought would be easy until you tried it?
 * What was the weirdest food you've eaten?
+* What was your least favourite food as a child? Do you still hate it or do you love it now?
 * What wastes the most time in your day to day life?
 * What weird thing do you have nostalgia for?
 * What would you change if you were in charge of the company you work for?
@@ -110,6 +114,7 @@ Below is a list of icebreakers already used in a previous standup.
 * Who is the most interesting person on your team?
 * Who on the team is most likely to write a book?
 * Who on the team would you want by your side during a zombie apocalypse?
+* Who in your team/company would you like to swap jobs with for a day?
 * Why is Kiele the GOAT?
 * Would you rather have a fresh haircut but smell like garbage, or have a garbage haircut but smell fresh?
 * Would you rather have hands for feet or feet for hands?
