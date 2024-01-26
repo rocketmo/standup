@@ -102,7 +102,7 @@ export const ICE_BREAKERS: string[] = [
   'Should major life decisions be made with the head or the heart?',
   'Is it more polite to be nice or honest?',
   'What does your perfect breakfast look like?',
-  'Describe your day using only emojis?',
+  'Describe your day using only emojis.',
   'If you could have any mythical or fictional creature as your pet, what would it be?',
   'In an alternate universe where your job is completely different, what would you be doing?',
   'If there was an office Olympics, what game would you excel at?',
