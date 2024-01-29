@@ -76,6 +76,7 @@ Below is a list of icebreakers already used in a previous standup.
 * What is your favourite letter of the alphabet?
 * What is your favourite meme or viral video?
 * What is your favourite month?
+* What is your favourite room in your house?
 * What is your favourite season?
 * What is your favourite self-care activity?
 * What is your favourite song?
@@ -106,6 +107,7 @@ Below is a list of icebreakers already used in a previous standup.
 * What weird thing do you have nostalgia for?
 * What would you change if you were in charge of the company you work for?
 * When someone finds out what you do, or where you are from, what question do they always ask you?
+* When you were a child, what did you want to be when you grew up?
 * Where have you traveled to?
 * Which colleague has the best fashion sense?
 * Which colleague is most likely to cry during an emotional moment?
