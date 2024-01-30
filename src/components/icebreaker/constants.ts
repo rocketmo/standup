@@ -117,4 +117,8 @@ export const ICE_BREAKERS: string[] = [
   'What is your all-time favourite TV show and why?',
   'Do you prefer to binge-watch shows or savour them one episode at a time?',
   'If you could bring back any canceled TV show for another season, which one would it be?',
+  'What inspired you to pursue your current career or profession?',
+  'If you had the chance to start your own business, what type of business would it be?',
+  'What is the most interesting or unusual app you have on your phone?',
+  'If you could create a hybrid animal by combining characteristics of two existing species, what would it be and why?',
 ];
