@@ -75,7 +75,7 @@ function checkAssignee(personName: string): void {
   const assignees = document.querySelectorAll<HTMLElement>(AVATAR_SELECTOR);
   for (let index = 0; index < assignees.length; index++) {
     const assignee = assignees[index];
-    const assigneeName = assignee.getAttribute('alt');
+    const assigneeName = assignee.parentElement?.nextSibling?.textContent;
     if (assigneeName && doesNameMatchHeader(personName, assigneeName)) {
       assignee.click();
       return;
@@ -90,7 +90,7 @@ function checkAssignee(personName: string): void {
 
   for (let index = 0; index < otherAssigneeImages.length; index++) {
     const assignee = otherAssigneeImages[index];
-    const assigneeName = otherAssigneeImages[index].getAttribute('alt');
+    const assigneeName = assignee.parentElement?.nextSibling?.textContent;
     if (assigneeName && doesNameMatchHeader(personName, assigneeName)) {
       assignee.click();
       break;
