@@ -9,6 +9,7 @@ Below is a list of icebreakers already used in a previous standup.
 * How did you spend the money from your very first job?
 * How do you like to eat your eggs?
 * How do you think you will be/act when you are old?
+* If aliens landed on Earth, what do you think they'd find the most bizarre?
 * If given the option to time travel to your past and give yourself some advice, which age would you choose to go to?
 * If money was no object, what would you would buy first?
 * If there was a vending machine in your home that could dispense literally anything, what would you want it to dispense?
@@ -18,10 +19,12 @@ Below is a list of icebreakers already used in a previous standup.
 * If you could eliminate one thing from your daily routine, what would it be and why?
 * If you could have any superpower what would it be?
 * If you could live anywhere in the world for a year, where would it be?
+* If you could only follow one person on social media, who would it be and why?
 * If you could only wear one colour for the rest of your life, what colour would you wear?
 * If you could pick one coworker to switch lives with, who would it be?
 * If you could teleport anywhere in the world right now, where would you go?
 * If you could time travel, where is the first place you would go?
+* If you had the chance to start your own business, what type of business would it be?
 * If you had to lose one of your senses, which would you choose to lose?
 * If you never had to sleep, what would you do with all those extra hours each day?
 * If you were a character in SpongeBob SquarePants, which one would you be?
@@ -33,11 +36,13 @@ Below is a list of icebreakers already used in a previous standup.
 * What are you hilariously bad at?
 * What are your favourite chips?
 * What are your favourite snacks?
+* What condiments go on your hotdog?
 * What culture would you like to learn more about?
 * What did your teachers and parents say would be really important when you grew up, but it hasn't been?
 * What do you do to unwind after a hard day?
 * What do you geek out about?
 * What do you resent paying for most?
+* What do you think the ideal age to be is?
 * What do you think was the most important invention in history?
 * What do you wish someone taught you a long time ago?
 * What do you wish your phone could do?
@@ -68,6 +73,7 @@ Below is a list of icebreakers already used in a previous standup.
 * What is your biggest pet peeve?
 * What is your drink of choice?
 * What is your favourite animal?
+* What is your favourite cereal?
 * What is your favourite food combination?
 * What is your favourite emoji?
 * What is your favourite genre of movie? Why?
@@ -77,6 +83,7 @@ Below is a list of icebreakers already used in a previous standup.
 * What is your favourite meme or viral video?
 * What is your favourite month?
 * What is your favourite room in your house?
+* What is your favourite scent?
 * What is your favourite season?
 * What is your favourite self-care activity?
 * What is your favourite song?
