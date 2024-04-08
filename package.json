@@ -1,6 +1,6 @@
 {
   "name": "standup",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A chrome extension to help facilitate standup meetings.",
   "scripts": {
     "build": "webpack --config webpack.config.js",
