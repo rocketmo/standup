@@ -24,6 +24,8 @@ import { getPersonIndex } from '../../util';
 import type { Person } from '../../util/types';
 import './index.scss';
 
+const UNASSIGNED = 'Unassigned';
+
 interface PersonsListProps {
   activePersonId?: string;
   persons: Person[];
@@ -304,11 +306,11 @@ export default function PersonsList(props: PersonsListProps) {
   const getEmptyMessage = () => {
     const onImportClick = () => {
       const avatarSelector =
-        "label[data-test-id='filters.ui.filters.assignee.stateless.avatar.assignee-filter-avatar'] img";
+        "label[data-test-id='filters.ui.filters.assignee.stateless.avatar.assignee-filter-avatar'] [role='img'] [hidden]";
       const assignees = document.querySelectorAll(avatarSelector);
       assignees.forEach((assignee) => {
-        const assigneeName = assignee.getAttribute('alt');
-        if (assigneeName) props.onAddPerson(assigneeName);
+        const assigneeName = assignee.textContent;
+        if (assigneeName && assigneeName !== UNASSIGNED) props.onAddPerson(assigneeName);
       });
 
       const showMore = document.querySelector<HTMLElement>(
@@ -318,12 +320,13 @@ export default function PersonsList(props: PersonsListProps) {
 
       showMore.click();
 
-      const otherSelector = ".atlaskit-portal-container button[role='menuitemcheckbox'] img";
+      const otherSelector =
+        ".atlaskit-portal-container button[role='menuitemcheckbox'] [role='img'] [hidden]";
       const otherAssignees = document.querySelectorAll(otherSelector);
 
       for (let index = 0; index < otherAssignees.length; index++) {
-        const assigneeName = otherAssignees[index].getAttribute('alt');
-        if (assigneeName) props.onAddPerson(assigneeName);
+        const assigneeName = otherAssignees[index].textContent;
+        if (assigneeName && assigneeName !== UNASSIGNED) props.onAddPerson(assigneeName);
       }
       showMore.click();
     };
