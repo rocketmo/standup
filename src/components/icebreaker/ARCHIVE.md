@@ -133,3 +133,44 @@ Below is a list of icebreakers already used in a previous standup.
 * Would you rather speak to animals or know other people's thoughts?
 * Would you rather spend time with other people or at home alone?
 * You cannot time travel, but your phone has the internet from 5 years in the future. What do you search for first?
+* Who is the most interesting person you've met and talked with?
+* What big problem do you think technology will solve next?
+* What do you want to do when you retire?
+* Who was your favourite teacher?
+* What was your funniest or worst experience with a dentist?
+* If the universe is just a simulation, what update or patch does it need?
+* Would you rather have more money or more time?
+* What is your go-to drink or snack while working?
+* Which website do you most often defer to when procrastinating?
+* How often do you work from your bed?
+* Name one colleague who is the most likely to escape a deserted island alive?
+* What is your favourite thing about your team?
+* In high school, what was the stupidest thing you did?
+* What was your best class in school?
+* What characteristic do you value the most in your coworkers?
+* Cake or pie?
+* What's the story behind your name?
+* If you were a character in Shrek, which one would you be?
+* What is your favourite theme park ride?
+* Would you rather live your life as a dog or a cat?
+* What is your favourite holiday?
+* What is your favourite trend to come out of the past 10 years?
+* What was the kindest thing a stranger ever did for you?
+* What was your first job?
+* If you could set up a chat between 2 famous people (dead or alive), who would you pick?
+* What is your favourite ice cream flavour?
+* If you could see one movie again for the first time, what would it be and why?
+* Would you rather live 100 years in the past or 100 years in the future?
+* If you could go back in time 10,000 years ago and make a cave painting to confuse everyone in the future, what would you draw?
+* What is your signature dance move, and can you show us a quick demonstration?
+* If you had a magic wand and could fix one everyday annoyance, what would it be?
+* Online shopping or in-store shopping?
+* If you could add one unconventional room to your house, what would it be used for?
+* If you were an online influencer, what kind of content would you create?
+* Should major life decisions be made with the head or the heart?
+* Do you have a favourite dish or recipe that your mom or dad makes?
+* What is your favourite type of shoe (e.g. boots, sneakers, heels)?
+* If there was an office Olympics, what game would you excel at?
+* Is it more polite to be nice or honest?
+* What does your perfect breakfast look like?
+* What's something you've tried that you will never do again?
