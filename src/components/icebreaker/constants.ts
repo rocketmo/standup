@@ -117,4 +117,12 @@ export const ICE_BREAKERS: string[] = [
   'If you had a choice between unlimited books or unlimited movies, which would you pick?',
   'If you could have a home with a view of the ocean or the mountains, which would you choose?',
   'When it comes to learning, do you prefer hands-on experience or traditional study methods?',
+  'Would you rather get free plane tickets or free accommodations for the rest of your life?',
+  'Would you rather always be two hours early or 20 minutes late?',
+  'Would you rather sail or van life around the world?',
+  "Would you rather read the end of every book or always forget the story's ending?",
+  'Would you rather have every traffic light turn green or always have the best parking spot?',
+  'Would you rather have slow internet or always forget your passwords?',
+  'What 1 or 2 companies would you like to be sponsored by?',
+  'How do you describe your job to a three-year-old?',
 ];
