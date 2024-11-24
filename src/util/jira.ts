@@ -1,5 +1,6 @@
 const CHECKED_ASSIGNEE_SELECTOR = 'input[name="ASSIGNEE"]:checked, input[name="assignee"]:checked';
-const ASSIGNEE_SHOW_MORE_SELECTOR = '#ASSIGNEE-show-more, #assignee-show-more';
+const ASSIGNEE_SHOW_MORE_SELECTOR =
+  '#ASSIGNEE-show-more, #assignee-show-more, button[data-testid="filters.ui.filters.assignee.stateless.show-more-button.assignee-filter-show-more"]';
 
 const HEADER_SELECTOR =
   '[data-test-id="platform-board-kit.ui.swimlane.swimlane-wrapper"] > div:nth-child(3)';
